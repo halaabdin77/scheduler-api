@@ -42,3 +42,8 @@ target/
 .vscode/
 node_modules/
 .env
+
+.DS_Store
+Thumbs.db
+
+src/main/resources/application.properties
