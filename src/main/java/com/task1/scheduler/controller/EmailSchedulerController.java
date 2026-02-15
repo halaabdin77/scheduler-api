@@ -1,7 +1,7 @@
 package com.task1.scheduler.controller;
 
 import com.task1.scheduler.dto.ScheduledEmailRequest;
-import com.task1.scheduler.model.Scheduledemail;
+import com.task1.scheduler.model.ScheduledEmail;
 import com.task1.scheduler.repository.ScheduledEmailRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class EmailSchedulerController {
 
     @PostMapping("/schedule")
     public String scheduleEmail(@RequestBody ScheduledEmailRequest request) {
-        Scheduledemail email = new Scheduledemail(
+        ScheduledEmail email = new ScheduledEmail(
                 null,
                 request.recipent(),
                 request.subject(),
