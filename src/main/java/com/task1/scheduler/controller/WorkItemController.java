@@ -31,6 +31,10 @@ public class WorkItemController {
 
         return service.findOverlappingWorkItems(start, end);
     }
+    @GetMapping("/all")
+    public List<CreateWorkItemResponse> getAllWorkItems() {
+        return service.getAllWorkItems();
+    }
 
     @GetMapping("/inside")
     public List<CreateWorkItemResponse> getWorkItemsFullyInside(

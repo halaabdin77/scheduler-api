@@ -37,6 +37,7 @@ public class EmailNotificationService implements NotificationService {
 
             System.out.println("SendGrid response code: " + response.getStatusCode());
 
+            System.out.println("API key starts with: " + sendGridApiKey.substring(0, 3));
 
         } catch (IOException e) {
             System.out.println("Email sending failed");

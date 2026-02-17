@@ -13,6 +13,7 @@ public class StockPriceService {
     private String apiKey;
 
     public Double getCurrentPrice(String symbol) {
+
         try {
             String url = String.format(
                     "https://api.twelvedata.com/price?symbol=%s&apikey=%s",
@@ -20,21 +21,17 @@ public class StockPriceService {
             );
 
             RestTemplate restTemplate = new RestTemplate();
-            Map response = restTemplate.getForObject(url, Map.class);
-
-            System.out.println("Twelve Data response: " + response);
+            Map<String, String> response =
+                    restTemplate.getForObject(url, Map.class);
 
             if (response == null || response.get("price") == null) {
-                System.out.println("Twelve Data limit or error hit for " + symbol);
                 return null;
             }
 
-            return Double.parseDouble((String) response.get("price"));
+            return Double.parseDouble(response.get("price"));
 
         } catch (Exception e) {
-            System.out.println("API error for " + symbol + ": " + e.getMessage());
             return null;
         }
     }
-
 }

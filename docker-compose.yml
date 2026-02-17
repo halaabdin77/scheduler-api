@@ -1,0 +1,31 @@
+services:
+
+  scheduler-db:
+    image: postgres:16
+    container_name: scheduler-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: scheduler
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  scheduler-app:
+    build: .
+    container_name: scheduler-app
+    restart: unless-stopped
+    depends_on:
+      scheduler-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://scheduler-db:5432/scheduler
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"

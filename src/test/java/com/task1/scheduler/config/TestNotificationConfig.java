@@ -17,7 +17,7 @@ public class TestNotificationConfig {
     @Primary
     public NotificationService testNotificationService() {
         return (to, subject, message) -> {
-            sentSubjects.add(subject);   // ✅ STORE the subject
+            sentSubjects.add(subject);
             System.out.println("test email: " + subject);
         };
     }

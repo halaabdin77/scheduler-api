@@ -41,6 +41,19 @@ public class WorkItemService {
         );
     }
 
+
+    public List<CreateWorkItemResponse> getAllWorkItems() {
+
+        return repository.findAll()
+                .stream()
+                .map(workItem -> new CreateWorkItemResponse(
+                        workItem.getId(),
+                        workItem.getTitle(),
+                        workItem.getStartTime(),
+                        workItem.getEndTime()
+                ))
+                .toList();
+    }
     public List<CreateWorkItemResponse> findOverlappingWorkItems(LocalDateTime start, LocalDateTime end) {
         return repository
                 .findByStartTimeLessThanAndEndTimeGreaterThan(end, start)
